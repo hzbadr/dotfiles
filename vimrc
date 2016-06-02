@@ -28,8 +28,6 @@ call s:LoadPlugins()
 call s:SourceConfigFilesIn('')
 call s:SourceConfigFilesIn('functions')
 call s:SourceConfigFilesIn('rcplugins')
-let g:haskellmode_completion_ghc = 1
-setlocal omnifunc=necoghc#omnifunc
 
 " vim-plug loads all the filetype, syntax and colorscheme files, so turn them on
 " _after_ loading plugins.
