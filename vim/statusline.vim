@@ -7,13 +7,15 @@ let g:lightline = {
       \   'left': [
       \             ['mode', 'paste'],
       \             ['emojipocalypse'],
-      \             ['fugitive', 'readonly', 'myfilename', 'modified']
+      \             ['fugitive', 'readonly', 'myfilename', 'modified'],
+      \             ['syntastic']
       \           ]
       \ },
       \ 'component': {
       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
       \   'emojipocalypse': '%{emoji#for("sparkles")}',
       \   'readonly': '%{(&filetype!="help" && &readonly) ? emoji#for("lock") : ""}',
+      \   'syntastic': '%#warningmsg#%{SyntasticStatuslineFlag()}%*',
       \ },
       \ 'component_function': {
       \   'myfilename': 'LightLineFilename',
