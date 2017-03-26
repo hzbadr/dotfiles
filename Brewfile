@@ -36,7 +36,7 @@ brew 'ctags'
 
 # It's vim
 brew 'mercurial'
-brew 'vim'
+brew 'vim', args: 'with-lua'
 
 # Used in Rails projects
 brew 'phantomjs'

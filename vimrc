@@ -62,6 +62,7 @@ Plug 'tpope/vim-fireplace'
 " Plumbing that makes everything nicer
 " Fuzzy-finder
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'Shougo/neocomplete.vim'
 " :Ag is like :grep but with `ag`
 Plug 'rking/ag.vim'
 " Easily comment/uncomment lines in many languages
@@ -374,6 +375,11 @@ nnoremap <leader>zr :VtrFocusRunner<CR>
 " vim-spec-runner
 " -----------------
 let g:spec_runner_dispatcher = 'VtrSendCommand! {command}'
+
+" neocomplete.vim
+" ----------------
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
 
 " luochen1990/rainbow
 " -----------------
