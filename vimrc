@@ -62,6 +62,7 @@ Plug 'tpope/vim-fireplace'
 " Plumbing that makes everything nicer
 " Fuzzy-finder
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'SirVer/ultisnips'
 " :Ag is like :grep but with `ag`
 Plug 'rking/ag.vim'
 " Easily comment/uncomment lines in many languages
