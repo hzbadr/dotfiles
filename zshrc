@@ -216,6 +216,8 @@ compdef viw=which
 # This sets up a bunch of bindings, so call this first and then call all
 # other `bindkey`s after it to override anything you like.
 bindkey -v
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
 # Fuzzy match against history, edit selected value
 # For exact match, start the query with a single quote: 'curl

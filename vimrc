@@ -13,7 +13,6 @@ let mapleader=" "
 " vim-plug: https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/bundle')
 " Web development
-Plug 'vim-coffee-script'
 Plug 'pangloss/vim-javascript'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'briancollins/vim-jst'
@@ -60,10 +59,11 @@ Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-fireplace'
 
 " Plumbing that makes everything nicer
-" Fuzzy-finder
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 " :Ag is like :grep but with `ag`
-Plug 'rking/ag.vim'
+Plug 'mileszs/ack.vim'
+Plug 'ggreer/the_silver_searcher'
+let g:ackprg = 'ag --nogroup --nocolor --column'
 " Easily comment/uncomment lines in many languages
 Plug 'tomtom/tcomment_vim'
 " <Tab> indents or triggers autocomplete, smartly
@@ -116,6 +116,8 @@ Plug 'christoomey/vim-quicklink'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 " }}}
 
@@ -170,7 +172,26 @@ augroup rails_shortcuts
   let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 augroup END
 " }}}
+"
+" ============================================================================
+" AG {{{
+" ===========================================================================
+"
+if executable('ag')
+  " Use ag over grep "
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
 
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore "
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache "
+  let g:ctrlp_use_caching = 0
+
+  " bind \ (backward slash) to grep shortcut "
+  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+  nnoremap \ :Ag<SPACE>
+endif
+" }}}
 " ============================================================================
 " COMPLETION {{{
 " ===========================================================================
@@ -337,16 +358,6 @@ set spellfile=$HOME/.vim/vim-spell-en.utf-8.add
 " ============================================================================
 " PLUGINS {{{
 " ===========================================================================
-
-" ag.vim
-" -----------------
-nnoremap <Leader>g :Ag!<Space>
-" K searches for word under cursor
-nnoremap K :Ag! "\b<C-R>=expand("<cword>")<CR>\b"<CR>
-
-" FZF
-" -----------------
-nnoremap <Leader>t :FZF<CR>
 
 " gist.vim
 " -----------------
