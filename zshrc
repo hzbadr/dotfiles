@@ -716,3 +716,5 @@ source ~/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # ZSH option, so set it after sourcing zsh-syntax-highlighting.
 # options here so it sticks.
 setopt print_exit_value
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
