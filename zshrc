@@ -718,3 +718,4 @@ source ~/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 setopt print_exit_value
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH=$HOME/bin:$PATH
