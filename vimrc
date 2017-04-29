@@ -1,263 +1,386 @@
-"""""""""""""""""""""""""""""""""""""
-" Allan MacGregor Vimrc configuration
-"""""""""""""""""""""""""""""""""""""
-set encoding=utf8
+" vim: set foldmethod=marker foldlevel=0:
+" ============================================================================
+" .vimrc of Khaja Minhajuddin
 
-"""" START Vundle Configuration
+set nocompatible
+"let g:loaded_syntastic_sass_sass_checker = 1 " disable syntastic for sass
 
-" Disable file type for vundle
-filetype off                  " required
+" >>>>>>>>>>>>>	HELP {{{
+" Installation
+" 1. Install plug by running the following:
+"  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" 2. Open vim and run
+"     PlugInstall
+" 3. Install htmltidy from: https://github.com/htacg/tidy-html5
+"}}}
 
-" set the runtime path to include Vundle and initialize
-call plug#begin('~/.vim/bundle')
-
-" let Vundle manage Vundle, required
-Plug 'gmarik/Vundle.vim'
-
-" Utility
-Plug 'scrooloose/nerdtree'
-Plug 'majutsushi/tagbar'
-Plug 'ervandew/supertab'
-Plug 'BufOnly.vim'
-Plug 'wesQ3/vim-windowswap'
-Plug 'SirVer/ultisnips'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf'
-Plug 'godlygeek/tabular'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'benmills/vimux'
-Plug 'jeetsukumaran/vim-buffergator'
-Plug 'gilsondev/searchtasks.vim'
-Plug 'Shougo/neocomplete.vim'
-Plug 'tpope/vim-dispatch'
-
-" Generic Programming Support
-Plug 'jakedouglas/exuberant-ctags'
-Plug 'honza/vim-snippets'
-Plug 'Townk/vim-autoclose'
-Plug 'tomtom/tcomment_vim'
-Plug 'tobyS/vmustache'
-Plug 'janko-m/vim-test'
+">>>>>>>>>>>>>>>>>>>>		PLUGINS {{{
+call plug#begin('~/.vim/plugged')
+" Make sure you use single quotes
+Plug 'szw/vim-tags'
+Plug 'KabbAmine/zeavim.vim'
+Plug 'bling/vim-airline' " awesome status bar
+Plug 'bling/vim-bufferline'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'dyng/ctrlsf.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'gregsexton/gitv', { 'on': 'Gitv' }
+Plug 'Keithbsmiley/investigate.vim'
+Plug 'kien/rainbow_parentheses.vim'
 Plug 'maksimr/vim-jsbeautify'
-Plug 'vim-syntastic/syntastic'
-Plug 'neomake/neomake'
-
-" Markdown / Writting
-Plug 'reedes/vim-pencil'
-Plug 'tpope/vim-markdown'
-Plug 'jtratner/vim-flavored-markdown'
-Plug 'LanguageTool'
-
-" Git Support
-Plug 'kablamo/vim-git-log'
-Plug 'gregsexton/gitv'
-Plug 'tpope/vim-fugitive'
-"Plug 'jaxbot/github-issues.vim'
-
-" PHP Support
-Plug 'phpvim/phpcd.vim'
-Plug 'tobyS/pdv'
-
-" Erlang Support
-Plug 'vim-erlang/vim-erlang-tags'
-Plug 'vim-erlang/vim-erlang-runtime'
-Plug 'vim-erlang/vim-erlang-omnicomplete'
-Plug 'vim-erlang/vim-erlang-compiler'
-
-" Elixir Support
-Plug 'elixir-lang/vim-elixir'
-Plug 'avdgaag/vim-phoenix'
-Plug 'mmorearty/elixir-ctags'
-Plug 'mattreduce/vim-mix'
-Plug 'BjRo/vim-extest'
-Plug 'frost/vim-eh-docs'
-Plug 'slashmili/alchemist.vim'
+Plug 'matchit.zip'
+Plug 'mattn/emmet-vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree' " file browser
+Plug 'scrooloose/syntastic'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'minhajuddin/snippets'
+Plug 'tomasr/molokai' " colorscheme
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-dispatch' " async command execution
 Plug 'tpope/vim-endwise'
-Plug 'jadercorrea/elixir_generator.vim'
-
-" Elm Support
-Plug 'lambdatoast/elm.vim'
-
-" Theme / Interface
-Plug 'AnsiEsc.vim'
-Plug 'ryanoasis/vim-devicons'
-Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
+Plug 'Yggdroot/indentLine'
+Plug 'wincent/Command-T'
+Plug 'kien/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-unimpaired'
+Plug 'minhajuddin/vim-quickrun'
+Plug 'kshenoy/vim-signature'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'godlygeek/tabular'
+Plug 'mileszs/ack.vim'
+Plug 'minhajuddin/zainu-vim'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'thinca/vim-ref'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'benmills/vimux'
+Plug 'jgdavey/vim-turbux'
+Plug 'danro/rename.vim'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'sjl/badwolf'
-Plug 'tomasr/molokai'
-Plug 'morhetz/gruvbox'
-Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plug 'junegunn/limelight.vim'
-Plug 'mkarmona/colorsbox'
-Plug 'romainl/Apprentice'
-Plug 'Lokaltog/vim-distinguished'
-Plug 'chriskempson/base16-vim'
-Plug 'w0ng/vim-hybrid'
-Plug 'AlessandroYorba/Sierra'
-Plug 'daylerees/colour-schemes'
-Plug 'effkay/argonaut.vim'
-Plug 'ajh17/Spacegray.vim'
-Plug 'atelierbram/Base2Tone-vim'
-Plug 'colepeters/spacemacs-theme.vim'
+Plug 'slashmili/alchemist.vim'
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-projectionist'
 
-call plug#end()            " required
-filetype plugin indent on    " required
-"""" END Vundle Configuration
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Language plugs
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Plug 'briancollins/vim-jst'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'digitaltoad/vim-pug'
+Plug 'elixir-lang/vim-elixir'
+Plug 'elzr/vim-json'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'fatih/vim-go'
+Plug 'groenewege/vim-less'
+Plug 'honza/dockerfile.vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'plasticboy/vim-markdown'
+Plug 'slim-template/vim-slim'
+Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+Plug 'wavded/vim-stylus'
+Plug 'wting/rust.vim'
+Plug 'lambdatoast/elm.vim'
+Plug 'Matt-Deacalion/vim-systemd-syntax'
+" Plug 'avdgaag/vim-phoenix'
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Unused plugs
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Plug 'chriskempson/vim-tomorrow-theme'
+" Plug 'tpope/vim-speeddating'
+" Plug 'tpope/vim-bundler'
+" Plug 'Raimondi/delimitMate'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'airblade/vim-gitgutter'
+" Plug 'chrisbra/NrrwRgn'
+" Plug 'junegunn/goyo.vim'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'mustache/vim-mustache-handlebars'
+" Plug 'jceb/vim-orgmode'
+" Plug 'ryanoasis/vim-devicons'
+" Plug 'skalnik/vim-vroom'
+" Plug 'junegunn/fzf',        { 'do': 'yes \| ./install' }
+" Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' } " fuzzy file finder
+" Plug 'dbext.vim' " check more on this
+" Plug 'nelstrom/vim-textobj-rubyblock'
+" unused
+" Plug 'kchmck/vim-coffee-script'
+" Plug 'tpope/vim-liquid'
+" Plug 'groenewege/vim-less'
+" Plug 'mxw/vim-jsx'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'tpope/vim-vinegar'
+runtime macros/matchit.vim
+call plug#end()
+" }}}
 
-"""""""""""""""""""""""""""""""""""""
-" Configuration Section
-"""""""""""""""""""""""""""""""""""""
-set nowrap
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+"		AUTOCOMMANDS
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-" OSX stupid backspace fix
-set backspace=indent,eol,start
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+"		VIM SETTINGS
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+" TODO: Move these settings to: Plug 'minhajuddin/vimsettings'
+colorscheme molokai
 
-" Show linenumbers
-set number
+" settings for gvim
+if has("gui_running")
+  " maximizes the gvim window
+  set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
+  " set guifont=Bitstream\ Vera\ Sans\ Mono\ for\ Powerline\ 11
+  set lines=999 columns=999
+  " No menus and no toolbar
+  set guioptions-=m
+  set guioptions-=T
+endif
 
-" Set Proper Tabs
-set tabstop=4
-set shiftwidth=4
-set smarttab
-set expandtab
+" settings for terminal vim
+if !has("gui_running")
+  set t_Co=256
+endif
 
-" Always display the status line
-set laststatus=2
-
-" Enable Elite mode, No ARRRROWWS!!!!
-let g:elite_mode=1
-
-" Enable highlighting of the current line
+let loaded_matchparen=1 " don't automatically highlight the matching parens
+let mapleader      = ' '
+let maplocalleader = ' '
+set autowriteall " autosave files
+set background=dark
+set clipboard=unnamedplus " Yanks go on clipboard
+set cmdheight=2
+set completeopt=menuone,preview,longest
 set cursorline
+set diffopt=filler,vertical,iwhite
+set encoding=utf-8
+set expandtab
+set fileencoding=utf8
+set fillchars= " unset pipe as the vertical seperator
+set foldlevel=3
+set foldlevelstart=99
+set foldmethod=syntax
+set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo " These commands open folds
+set grepformat=%f:%l:%c:%m,%f:%l:%m
+set grepprg=grep\ -nH\ $*
+set guioptions=aci
+set hidden
+set hlsearch " CTRL-L / CTRL-R W
+set ignorecase smartcase
+set lazyredraw                  " don't redraw while in macros
+" set list
+set matchtime=0 " to stop automatic moving of cursor to matched paren
+set modeline " read modeline from footer to detect filetype?
+set mouse=a
+set mousehide
+set noautoread
+set nojoinspaces
+set number " show line number
+set selectmode=key
+set shiftwidth=2
+set shortmess=atI               " shorten messages and don
+set showfulltag " When completing by tag, show the whole tag, not just the function name
+set showmatch " Show matching braces
+set showmode
+set smartindent
+set softtabstop=2
+set splitbelow
+set synmaxcol=200 " Syntax coloring lines that are too long just slows down the world
+set tabstop=2
+set timeoutlen=500
+set virtualedit=block
+set whichwrap=b,s
+set wildchar=9 " tab as completion character
+set wildignore+=node_modules,deps,*.gif,*.fla,*.png,*.swf,*.jpg,tmp/*,public/assets/*,*.ogv,*.ico,*.pdf,node_modules,_build,vendor/assets/bower,__*,data/*,rel/*,priv/static/*
+set wildmode=list:longest,full
+set wrap!
+syntax sync fromstart
 
-" Theme and Styling
-syntax on
-set t_Co=256
 
-" if (has("termguicolors"))
-"   set termguicolors
-" endif
+" search stuff
+set gdefault            " Use 'g' flag by default with :s/foo/bar/.
+set magic               " Use 'magic' patterns (extended regular expressions).
 
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme spacegray
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Turn persistent undo on
+"    means that you can undo even when you close a buffer/VIM
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+try
+  set undodir=~/.vim_runtime/temp_dirs/undodir
+  set undofile
+catch
+endtry
+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-let g:spacegray_underline_search = 1
-let g:spacegray_italicize_comments = 1
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+"		PLUGIN SETTINGS
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+" NERDTree
+let NERDTreeChDirMode=2 " Change the NERDTree directory to the root node
 
-" Vim-Airline Configuration
-let g:airline#extensions#tabline#enabled = 1
+let g:NERDShutUp = 1 " disable warnings from NERDCommenter
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<C-o>"
+"let g:UltiSnipsJumpForwardTrigger="<C-n>"
+"let g:UltiSnipsJumpBackwardTrigger="<C-p>"
+let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+
+" help bufferline
+let g:bufferline_echo = 0 " hide bufferline from command bar
+let g:bufferline_show_bufnr = 1
+let g:bufferline_rotate = 2
+"let g:bufferline_fixed_index =  0 "always first
+
+" help vim-airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme='hybrid'
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1
+let g:airline_theme = 'powerlineish'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_inactive_collapse=1
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ }
 
-" Syntastic Configuration
+let g:airline#extensions#hunks#enabled = 0
+
+let g:airline#extensions#default#section_truncate_width = {
+      \ 'a': 40,
+      \ 'b': 80,
+      \ 'c': 40,
+      \ 'x': 60,
+      \ 'y': 90,
+      \ 'z': 50,
+      \ }
+
+" let g:airline_symbols.linenr = '' "hide linenr symbol
+let g:airline_section_z = '%3v' " just show the column number instead of %, linenr and the linenr symbol
+let g:airline#extensions#default#section_truncate_width = {}
+
+" rainbow parans
+let g:rbpt_colorpairs = [
+      \ ['brown',       'RoyalBlue3'],
+      \ ['Darkblue',    'SeaGreen3'],
+      \ ['darkgray',    'DarkOrchid3'],
+      \ ['darkgreen',   'firebrick3'],
+      \ ['darkcyan',    'RoyalBlue3'],
+      \ ['darkred',     'SeaGreen3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['brown',       'firebrick3'],
+      \ ['gray',        'RoyalBlue3'],
+      \ ['black',       'SeaGreen3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['Darkblue',    'firebrick3'],
+      \ ['darkgreen',   'RoyalBlue3'],
+      \ ['darkcyan',    'SeaGreen3'],
+      \ ['darkred',     'DarkOrchid3'],
+      \ ['red',         'firebrick3'],
+      \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+" <<<<<
+
+" syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_enable_elixir_checker = 1
-" let g:syntastic_elixir_checkers = ["elixir"]
+let g:syntastic_check_on_wq = 0
 
-" Neomake settings
-autocmd! BufWritePost * Neomake
-let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'dogma']
+" indent
+let g:indentLine_char = '│'
+let g:indentLine_color_gui = '#333333'
+"let g:indentLine_char = "┊"
+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-" Vim-PDV Configuration
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 
-" Markdown Syntax Support
-augroup markdown
-    au!
-    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+"		MAPPINGS
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+"
+" NERDTree
+map <leader>nt :execute 'NERDTreeToggle'<cr>
+" map <leader>nc :execute 'NERDTreeClose'<cr>
+map <leader>nn :execute 'NERDTree'<cr>
 
-" Github Issues Configuration
-let g:github_access_token = "e6fb845bd306a3ca7f086cef82732d1d5d9ac8e0"
+"map <C-d> :execute 'source /home/minhajuddin/r/vimrc/vimrc \| PlugInstall'<cr>
+map <C-d> :execute 'QuickRun'<cr>
 
-" Vim-Alchemist Configuration
-let g:alchemist#elixir_erlang_src = "/Users/amacgregor/Projects/Github/alchemist-source"
-let g:alchemist_tag_disable = 1
+nnoremap <leader>K :call investigate#Investigate()<CR>
+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+" CUSTOM FUNCTIONS
+" >>>>>
+" TODO:
 
-" Vim-Supertab Configuration
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+nnoremap Q @q "  Use Q to execute default register.
 
-" Settings for Writting
-let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
-let g:languagetool_jar  = '/opt/languagetool/languagetool-commandline.jar'
+" Org mode stuff
+let g:org_agenda_files = ['~/org/*.org']
 
-" Vim-pencil Configuration
-augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
-augroup END
 
-" Vim-UtilSnips Configuration
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+"let g:airline#extensions#tabline#show_close_button = 0
+"let g:airline#extensions#tabline#enabled = 2
+"let g:airline#extensions#tabline#fnamemod = ':t'
+"let g:airline#extensions#tabline#left_sep = ''
+"let g:airline#extensions#tabline#left_alt_sep = ''
+"let g:airline#extensions#tabline#right_sep = ''
+"let g:airline#extensions#tabline#right_alt_sep = ''
+"let g:airline#extensions#tabline#buffer_nr_show = 1
 
-" Vim-Test Configuration
-let test#strategy = "vimux"
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
 
-" Neocomplete Settings
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+"Ack stuff
+let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+nnoremap <leader>a :execute 'Ack'<cr>
+" Disable YCM
+"let g:loaded_youcompleteme = 1
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+"
+"
+"
+" Golang stuff
+let g:go_fmt_command = "goimports"
 
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+let g:UltiSnipsSnippetsDir = "/home/minhajuddin/.vim/plugged/snippets/UltiSnips"
+" Syntastic
+let g:syntastic_eruby_ruby_quiet_messages =
+      \ {'regex': 'possibly useless use of a variable in void context'}
 
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
+let g:elm_format_autosave = 1
 
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-" Elixir Tagbar Configuration
 let g:tagbar_type_elixir = {
     \ 'ctagstype' : 'elixir',
     \ 'kinds' : [
@@ -271,113 +394,8 @@ let g:tagbar_type_elixir = {
         \ 'o:operators',
         \ 'm:modules',
         \ 'p:protocols',
-        \ 'r:records',
-        \ 't:tests'
+        \ 'r:records'
     \ ]
-    \ }
+\ }
 
-" Fzf Configuration
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" Default fzf layout
-" - down / up / left / right
-let g:fzf_layout = { 'down': '~40%' }
-
-" In Neovim, you can set up fzf window using a Vim command
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
-
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-" Enable per-command history.
-" CTRL-N and CTRL-P will be automatically bound to next-history and
-" previous-history instead of down and up. If you don't like the change,
-" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
-let g:fzf_history_dir = '~/.local/share/fzf-history'
-
-"""""""""""""""""""""""""""""""""""""
-" Mappings configurationn
-"""""""""""""""""""""""""""""""""""""
-map <C-n> :NERDTreeToggle<CR>
-map <C-m> :TagbarToggle<CR>
-
-" Omnicomplete Better Nav
-inoremap <expr> <c-j> ("\<C-n>")
-inoremap <expr> <c-k> ("\<C-p>")
-
-" Neocomplete Plug mappins
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" Mapping selecting Mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-" Shortcuts
-nnoremap <Leader>o :Files<CR>
-nnoremap <Leader>O :CtrlP<CR>
-nnoremap <Leader>w :w<CR>
-
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" Vim-Test Mappings
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
-
-" Vim-PDV Mappings
-autocmd FileType php inoremap <C-p> <ESC>:call pdv#DocumentWithSnip()<CR>i
-autocmd FileType php nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
-autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
-
-" Disable arrow movement, resize splits instead.
-" if get(g:, 'elite_mode')
-" 	nnoremap <Up>    :resize +2<CR>
-" 	nnoremap <Down>  :resize -2<CR>
-" 	nnoremap <Left>  :vertical resize +2<CR>
-" 	nnoremap <Right> :vertical resize -2<CR>
-" endif
-"
-map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
-
-" Advanced customization using autoload functions
-inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
-
-" Vim-Alchemist Mappings
-autocmd FileType elixir nnoremap <buffer> <leader>h :call alchemist#exdoc()<CR>
-autocmd FileType elixir nnoremap <buffer> <leader>d :call alchemist#exdef()<CR>
+let g:alchemist_tag_disable = 1
