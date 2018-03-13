@@ -6,7 +6,7 @@
 ensure_we_are_inside_tmux() {
   if _not_in_tmux; then
     _ensure_tmux_is_running
-    tmux attach -t "$(_most_recent_tmux_session)"
+#    tmux attach -t "$(_most_recent_tmux_session)"
   fi
 }
 
@@ -456,7 +456,7 @@ prompt_git_email(){
 # is sourced but is evaluated every time we need the prompt.
 setopt prompt_subst
 
-PROMPT='$(prompt_ruby_version) $(prompt_shortened_path)$(prompt_git_email)$(prompt_full_git_status) $ '
+PROMPT='$(prompt_shortened_path)$(prompt_git_email)$(prompt_full_git_status) $ '
 # }}}
 
 # Git {{{
@@ -719,3 +719,7 @@ setopt print_exit_value
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH=$HOME/bin:$PATH
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

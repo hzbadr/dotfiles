@@ -1,6 +1,7 @@
 """""""""""""""""""""""""""""""""""""
 " Allan MacGregor Vimrc configuration
 """""""""""""""""""""""""""""""""""""
+let mapleader=","
 set encoding=utf8
 
 """" START Vundle Configuration
@@ -310,6 +311,9 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 """""""""""""""""""""""""""""""""""""
 map <C-n> :NERDTreeToggle<CR>
 map <C-m> :TagbarToggle<CR>
+
+" Prompt for a command to run
+map <Leader>vp :VimuxPromptCommand<CR>
 
 " Omnicomplete Better Nav
 inoremap <expr> <c-j> ("\<C-n>")

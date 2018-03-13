@@ -16,7 +16,7 @@
   # fatal: Not possible to fast-forward, aborting.
   # At that point, I know that I've forgotten to do something in my normal
   # workflow, and I retrace my steps.
-  ff = only
+  # ff = only
 [diff]
   # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
   # instead of a/b/c/d as prefixes for patches
@@ -107,7 +107,7 @@
   changed = green # deleted items NOT done with "git rm" are this color too
   untracked = cyan
 [init]
-  templatedir = ~/.git-template
+  # templatedir = ~/.git-template
 [github]
   user = hzbadr
 [pager]
